@@ -1,0 +1,42 @@
+/*p {*/
+  /*color: red;*/
+  /*width: 500px;*/
+  /*border: 1px solid black;*/
+/*}*/
+/*li, h1 {*/
+  /*color: gray;*/
+/*}*/
+/*li[class] {*/
+  /*color: yellow;*/
+/*}*/
+html {
+  font-size: 10px;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #00939F;
+}
+body {
+  width: 600px;
+  margin: 0 auto;
+  background-color: #FF9500;
+  padding: 0px 20px 20px 20px;
+  border: 5px solid black;
+}
+h1 {
+  margin: 0;
+  padding: 10px 0;
+  color: #00539F;
+  text-shadow: 3px 3px 1px black;
+  font-size: 60px;
+  text-align: center;
+  /*background-color: #00539F;*/
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 3px;
+}
+img {
+  display: block;
+  margin: 0 auto;
+}
