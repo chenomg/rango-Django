@@ -18,7 +18,7 @@ from django.contrib import admin
 from rango import views
 
 urlpatterns = [
-    url(r'^$', include('rango.urls')),
+    url(r'^', include('rango.urls')),
     url(r'^rango/', include('rango.urls')),
     url(r'^admin/', admin.site.urls),
 ]
