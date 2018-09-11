@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Rango</title>
+  </head>
+  <body>
+    <div>
+      {% if category %}
+        <p>{{ category.name }}</p>
+        {% if pages %}
+          <ul>
+          {% for page in pages %}
+          <li><a href="{{ page.url }}" target="_blank">{{ page.title }}</a></li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          <strong>There's no pages here!</strong>
+        {% endif %}
+      {% else %}
+      <strong>The category does not exist!!</strong>
+      {% endif %}
+    </div>
+  </body>
+</html>

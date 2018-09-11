@@ -32,6 +32,7 @@ class PageAdmin(admin.ModelAdmin):
     ]
     list_display = ('title', 'category', 'url', 'views')
     search_fields = ['category', 'title']
+    list_filter = ['category']
 
 
 admin.site.register(Category, CategoryAdmin)
