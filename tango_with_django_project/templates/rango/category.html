@@ -22,6 +22,9 @@
       <strong>The category does not exist!!</strong>
       {% endif %}
     </div>
+    <div>
+      <a href="/rango/category/{{ category.slug }}/add_page/" target="_blank">在本目录下新增项目</a>
+    </div>
     <p><a href="{% url 'index' %}" target="_blank">Back to home page</a></p>
   </body>
 </html>
