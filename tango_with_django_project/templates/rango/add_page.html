@@ -1,29 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Rango</title>
-  </head>
-  <body>
-    <h1>Add a Page</h1>
-    <div>
-      {% if category %}
-        <form id="page_form" action="/rango/category/{{ category.slug }}/add_page/" method="post" accept-charset="utf-8">
-          {% csrf_token %}
-          {% for hidden in form.hidden_fields %}
-            {{ hidden }}
-          {% endfor %}
-          {% for field in form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}
-            {{ field }}
-          {% endfor %}
-          <input type="submit" value="Creat Page" name="submit" id="submit"/>
-        </form>
-      {% else %}
-        <p>Category does not exist!</p>
-      {% endif %}
-    </div>
-  </body>
-</html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+  Add a page in {{ category.name }}
+{% endblock %}
+{% block body_block %}
+  <h1>Add a Page</h1>
+  <div>
+    {% if category %}
+    <form id="page_form" action="{% url 'rango:add_page' category.slug %}" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+          {{ field.errors }}
+          {{ field.help_text }}
+          {{ field }}
+        {% endfor %}
+        <input type="submit" value="Creat Page" name="submit" id="submit"/>
+      </form>
+    {% else %}
+      <p>Category does not exist!</p>
+    {% endif %}
+  </div>
+{% endblock %}

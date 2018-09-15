@@ -1,30 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Rango</title>
-  </head>
-  <body>
-    <div>
-      {% if category %}
-        <p>{{ category.name }}</p>
-        {% if pages %}
-          <ul>
-          {% for page in pages %}
-          <li><a href="{{ page.url }}" target="_blank">{{ page.title }}</a></li>
-          {% endfor %}
-          </ul>
-        {% else %}
-          <strong>There's no pages here!</strong>
-        {% endif %}
-      {% else %}
-      <strong>The category does not exist!!</strong>
-      {% endif %}
-    </div>
-    <div>
-      <a href="/rango/category/{{ category.slug }}/add_page/" target="_blank">在本目录下新增项目</a>
-    </div>
-    <p><a href="{% url 'index' %}" target="_blank">Back to home page</a></p>
-  </body>
-</html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+  {{ category.name }}
+{% endblock %}
+{% block body_block %}
+  {% if category %}
+    <p><h1>{{ category.name }}</h1></p>
+    {% if pages %}
+      <ul>
+      {% for page in pages %}
+      <li><a href="{{ page.url }}" target="_self">{{ page.title }}</a></li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <strong>There's no pages here!</strong>
+    {% endif %}
+    <a href="{% url 'rango:add_page' category.slug %}" target="_self">Add a page in this Category</a>
+  {% else %}
+  <strong>The category does not exist!!</strong>
+  {% endif %}
+{% endblock %}
