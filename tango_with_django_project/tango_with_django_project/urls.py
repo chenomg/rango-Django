@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/rango/')),
     url(r'^rango/', include('rango.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]

@@ -35,10 +35,11 @@
         <li><a href="{% url 'rango:about' %}" target="_self">About</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'rango:add_category' %}" target="_self">New Category</a></li>
-            <li><a href="{% url 'rango:logout' %}" target="_self">LogOut</a></li>
+            <li><a href="{% url 'auth_logout' %}?next=/" target="_self">LogOut</a></li>
+            <li><a href="{% url 'auth_password_change' %}" target="_self">Change Password</a></li>
         {% else %}
-            <li><a href="{% url 'rango:register' %}" target="_self">Sign Up</a></li>
-            <li><a href="{% url 'rango:login' %}" target="_self">Login</a></li>
+            <li><a href="{% url 'registration_register' %}" target="_self">Sign Up</a></li>
+            <li><a href="{% url 'auth_login' %}" target="_self">Login</a></li>
         {% endif %}
         <p>
             visitors: {{ visits }}
