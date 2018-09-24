@@ -43,11 +43,11 @@
                     <a class="nav-item nav-link" href="{% url 'rango:add_category' %}">Add a New Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item nav-link" href="{% url 'auth_logout' %}">Logout</a>
+                    <a class="nav-item nav-link" href="{% url 'auth_logout'  %}?next={% url 'rango:index' %}">Logout</a>
                 </li>
                     {% else %}
                 <li class="nav-item">
-                    <a class="nav-item nav-link" href="{% url 'registration_register' %}">Register Here</a>
+                    <a class="nav-item nav-link" href="{% url 'registration_register' %}">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-item nav-link" href="{% url 'auth_login' %}">Login</a>
