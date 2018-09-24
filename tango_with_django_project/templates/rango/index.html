@@ -9,29 +9,35 @@
             <h1>Hey there parter.</h1>
         {% endif %}
     </div>
-    <div>
-        {% if categories %}
-        <p><h2>Most Liked 5 Categories</h2></p>
-        <ul>
-            {% for category in categories %}
-            <li><a href="{% url 'rango:show_category' category.slug %}" target="_self">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <strong>There are no category!!</strong>
-        {% endif %}
-    </div>
-    <div>
-        {% if pages %}
-        <p><h2>Most Viewed 5 Pages</h2></p>
-        <ul>
-            {% for page in pages %}
-            <li><a href="{{ page.url }}" target="_self">{{ page.title }}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <strong>There are no page!!</strong>
-        {% endif %}
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <p><h2>Most Liked 5 Categories</h2></p>
+            {% if categories %}
+            <ul class="list-group">
+                {% for category in categories %}
+                <li class="list-group-item">
+                    <a href="{% url 'rango:show_category' category.slug %}" target="_self">{{ category.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>There are no category!!</strong>
+            {% endif %}
+        </div>
+        <div class="col-lg-6">
+            <p><h2>Most Viewed 5 Pages</h2></p>
+            {% if pages %}
+            <ul class="list-group">
+                {% for page in pages %}
+                <li class="list-group-item">
+                    <a href="{{ page.url }}" target="_self">{{ page.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>There are no page!!</strong>
+            {% endif %}
+        </div>
     </div>
     <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango!"/>
 {% endblock %}
