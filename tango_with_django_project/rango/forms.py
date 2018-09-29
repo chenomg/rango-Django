@@ -18,6 +18,10 @@ class CategoryForm(forms.ModelForm):
         fields = ('name', )
 
 
+class SearchForm(forms.ModelForm):
+    query = forms.CharField(help_text="Please enter what you want to search.")
+
+
 class PageForm(forms.ModelForm):
     title = forms.CharField(
         max_length=128, help_text="Please enter the title of the page.")

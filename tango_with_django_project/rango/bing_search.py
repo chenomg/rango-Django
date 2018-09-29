@@ -3,14 +3,13 @@
 
 import json
 import requests
-import os
 
 
 def read_bing_key():
     try:
         with open('bing.key', 'r') as f:
             bing_api_key = f.readline()
-    except Exception as e:
+    except Exception:
         raise IOError('bing.key file not found')
     return bing_api_key
 

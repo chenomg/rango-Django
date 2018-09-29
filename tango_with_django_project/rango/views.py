@@ -1,11 +1,12 @@
 from datetime import datetime
 from django.shortcuts import render
 from rango.models import Category, Page
-from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, SearchForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from rango import bing_search
 
 
 def add_category(request):
@@ -51,6 +52,24 @@ def index(request):
     response = render(request, 'rango/index.html', context=context_dict)
     # response.set_cookie('visits', context_dict['visits'])
     return response
+
+
+def search(request):
+    if request.method == "POST":
+        form = request.POST
+        query = form['query'].strip()
+        results = bing_search.run_query(query)
+        titles = []
+        urls = []
+        summaries = []
+        for res in results:
+            titles.append(res['title'])
+            urls.append(res['link'])
+            summaries.append(res['summary'])
+        context_dict = {'results': results, 'query': query}
+    else:
+        context_dict = None
+    return render(request, 'rango/search.html', context=context_dict)
 
 
 def show_category(request, category_name_slug):
@@ -144,8 +163,7 @@ def visitor_cookie_handler(request):
     visits = int(get_server_side_cookie(request, 'visits', '1'))
     last_visit_cookie = get_server_side_cookie(request, 'last_visit',
                                                str(datetime.now())[:-7])
-    last_visit_time = datetime.strptime(last_visit_cookie,
-                                        '%Y-%m-%d %H:%M:%S')
+    last_visit_time = datetime.strptime(last_visit_cookie, '%Y-%m-%d %H:%M:%S')
     if (datetime.now() - last_visit_time).seconds > 1:
         visits += 1
         request.session['last_visit'] = str(datetime.now())[:-7]
