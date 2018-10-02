@@ -58,14 +58,15 @@ def search(request):
     if request.method == "POST":
         form = request.POST
         query = form['query'].strip()
-        results = bing_search.run_query(query)
-        titles = []
-        urls = []
-        summaries = []
-        for res in results:
-            titles.append(res['title'])
-            urls.append(res['link'])
-            summaries.append(res['summary'])
+        results = [{}]
+        try:
+            results = bing_search.run_query(query)
+        except IOError:
+            results[0]['title'] = 'bing.key file not found!'
+        except KeyError:
+            results[0]['title'] = 'key not found!'
+        except Warning:
+            results[0]['title'] = 'Search Error, check the key file and web connection!'
         context_dict = {'results': results, 'query': query}
     else:
         context_dict = None
