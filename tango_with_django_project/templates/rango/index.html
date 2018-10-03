@@ -30,7 +30,7 @@
             <ul class="list-group">
                 {% for page in pages %}
                 <li class="list-group-item">
-                    <a href="{{ page.url }}" target="_self">{{ page.title }}</a>
+                    <a href="{% url 'rango:track_url' page.id %}" target="_blank">{{ page.title }}@{{ page.views }}</a>
                 </li>
                 {% endfor %}
             </ul>
@@ -39,5 +39,6 @@
             {% endif %}
         </div>
     </div>
+    <br \>
     <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango!"/>
 {% endblock %}

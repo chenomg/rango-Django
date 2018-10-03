@@ -66,7 +66,8 @@ def search(request):
         except KeyError:
             results[0]['title'] = 'key not found!'
         except Warning:
-            results[0]['title'] = 'Search Error, check the key file and web connection!'
+            results[0][
+                'title'] = 'Search Error, check the key file and web connection!'
         context_dict = {'results': results, 'query': query}
     else:
         context_dict = None
@@ -80,6 +81,21 @@ def show_category(request, category_name_slug):
         pages = Page.objects.filter(category=category)
         context_dict['category'] = category
         context_dict['pages'] = pages
+        if request.method == "POST":
+            form = request.POST
+            query = form['query'].strip()
+            results = [{}]
+            try:
+                results = bing_search.run_query(query)
+            except IOError:
+                results[0]['title'] = 'bing.key file not found!'
+            except KeyError:
+                results[0]['title'] = 'key not found!'
+            except Warning:
+                results[0][
+                    'title'] = 'Search Error, check the key file and web connection!'
+            context_dict['results'] = results
+            context_dict['query'] = query
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['pages'] = None
@@ -171,3 +187,11 @@ def visitor_cookie_handler(request):
     else:
         request.session['last_visit'] = last_visit_cookie
     request.session['visits'] = visits
+
+
+def track_url(request, page_id):
+    if request.method == 'GET':
+        page = Page.objects.get(id=page_id)
+        page.views += 1
+        page.save()
+        return HttpResponseRedirect(page.url)

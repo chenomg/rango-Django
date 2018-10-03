@@ -21,4 +21,34 @@
   {% else %}
   <strong>The category does not exist!!</strong>
   {% endif %}
+  {% if user.is_authenticated %}
+    <div>
+        <h3>Search with Rango</h3>
+        <form class="form-inline" action="{% url 'rango:show_category' category.slug %}" role="form" method="post" id="user_form" accept-charset="utf-8">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="input-group">
+            {% if query %}
+            <input type="text" class="form-control form-control-lg" value="{{ query }}" name="query" id="id_query" size="50" />
+            {% else %}
+            <input type="text" class="form-control form-control-lg" value="" name="query" id="id_query" size="50" placeholder="Search" />
+            {% endif %}
+            </div>
+            <!--<div class="col-12 col-md-2">-->
+            <div>
+            <button type="submit" class="btn btn-block btn-lg btn-primary"/>Search</button>
+            </div>
+        </div>
+        </form>
+        {% if results %}
+        {% for result in results %}
+        <h3><a href="{{ result.link }}">{{ result.title }}</a></h3>
+        <p>{{ result.summary }}</p>
+        <p><a href="{% url 'rango:show_category' category.slug %}">Add to this Category(待完善)</a></p>
+        <hr />
+        <br />
+        {% endfor %}
+        {% endif %}
+    </div>
+  {% endif %}
 {% endblock %}
