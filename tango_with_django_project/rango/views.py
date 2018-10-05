@@ -195,3 +195,8 @@ def track_url(request, page_id):
         page.views += 1
         page.save()
         return HttpResponseRedirect(page.url)
+
+
+def register_profile(request):
+    return render(request, 'rango/profile_registration.html', {})
+    pass

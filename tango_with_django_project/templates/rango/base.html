@@ -40,6 +40,9 @@
                 </li>
                     {% if user.is_authenticated %}
                 <li class="nav-item">
+                    <a class="nav-item nav-link" href="{% url 'rango:register_profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-item nav-link" href="{% url 'rango:add_category' %}">Add a New Category</a>
                 </li>
                 <li class="nav-item">

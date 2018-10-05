@@ -6,17 +6,22 @@
 {% endblock %}
 
 {% block body_block %}
-  <h1>Profile Regsitration</h1>
   {% if user.is_authenticated %}
-    Rango says: <strong>Here's your Registration Profile</strong><br />
-    <form id='user_form' action="{% url 'rango:register' %}" method="post">
-      {% csrf_token %}
-      {{ user_form.as_p }}
-      {{ profile_form.as_p }}
-      <input type="submit" value="Register" name="submit" />
+    <form id='user_form' action="{% url 'rango:register_profile' %}" method="post">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Profile Regsitration</h2>
+        <div class="input-group">
+            <span class="input-group-addon">Username</span>
+            <input type="text" value="" name="" id=""/>
+        </div>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" name="username" class="form-control" value="{{ user.username }}" required autofocus/>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">提交变更</button>
     </form>
   {% else %}
-    Rango says: <strong>Regsiter here!</strong><br />
+  Rango says: <a href="{% url 'rango:register' %}"><strong>Regsiter here!</strong></a><br />
   {% endif %}
     <a href="{% url 'rango:index' %}" target="_self">Return to the home page!</a><br />
 {% endblock %}
