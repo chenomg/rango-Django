@@ -7,12 +7,16 @@
 
 {% block body_block %}
   {% if user.is_authenticated %}
-    <form id='user_form' action="{% url 'rango:register_profile' %}" method="post">
+    <form id='user_form' action="{% url 'rango:register_profile' %}" method="post" role="form" class="bs-example bs-example-form">
         {% csrf_token %}
         <h2 class="form-signin-heading">Profile Regsitration</h2>
         <div class="input-group">
             <span class="input-group-addon">Username</span>
-            <input type="text" value="" name="" id=""/>
+            <input type="text" value="{{ user.username }}" class="form-control"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Username</span>
+            <input type="text" value="{{ user.username }}" class="form-control"/>
         </div>
         <label for="inputUsername" class="sr-only">Username</label>
         <input type="text" name="username" class="form-control" value="{{ user.username }}" required autofocus/>
