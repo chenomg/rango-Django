@@ -12,16 +12,20 @@
         <h2 class="form-signin-heading">Profile Regsitration</h2>
         <div class="input-group">
             <span class="input-group-addon">Username</span>
-            <input type="text" value="{{ user.username }}" class="form-control"/>
+            <input type="text" value="{{ user.username }}" name="username" class="form-control"/>
         </div>
         <div class="input-group">
-            <span class="input-group-addon">Username</span>
-            <input type="text" value="{{ user.username }}" class="form-control"/>
+            <span class="input-group-addon">Email</span>
+            <input type="text" value="{{ user.email }}" name="email" class="form-control"/>
         </div>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" name="username" class="form-control" value="{{ user.username }}" required autofocus/>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Password" required/>
+        <div class="input-group">
+            <span class="input-group-addon">Date-joined</span>
+            <input type="text" value="{{ user.date_joined }}" class="form-control"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input type="text" value="{{ user.password }}" name="password" class="form-control"/>
+        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">提交变更</button>
     </form>
   {% else %}

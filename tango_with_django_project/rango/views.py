@@ -198,5 +198,9 @@ def track_url(request, page_id):
 
 
 def register_profile(request):
+    if request.method == "POST":
+        user_form = UserForm(data=request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            user.save()
     return render(request, 'rango/profile_registration.html', {})
-    pass
