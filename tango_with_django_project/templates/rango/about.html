@@ -4,7 +4,7 @@
   About
 {% endblock %}
 {% block body_block %}
-  <h1>Hi there!</h1>
+  <h1 class="h1">Hi there!</h1>
   <p>Rango says here is the about page!
     <p>Click
     <a href="{% url 'rango:index' %}" target="_self">Here</a>
@@ -12,4 +12,8 @@
     </p>
     <p>This tutorial has been put together by {{ yourname }}</p>
   </p>
+  <button onClick="alert('You clicked the button using JavaScript.');">Click me - I run JavaScript</button>
+  <br>
+  <br>
+  <button id="about-btn">Click me - I'm JavaScript on speed</button>
 {% endblock %}
