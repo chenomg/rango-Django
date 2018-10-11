@@ -5,11 +5,21 @@
 {% endblock %}
 {% block body_block %}
   {% if category %}
-    <p><h1>{{ category.name }}</h1></p>
+    <p><h1>{{ category.name }}</h1>
+        <strong id="like_count">{{ category.likes }}</strong>likes
+        <br>
+        {% if user.is_authenticated %}
+        <button type="button" id="likes" data-catid="{{ category.id }}" class="brn btn-primary">
+            Like
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        {% endif %}
+    </p>
     {% if pages %}
       <ul>
       {% for page in pages %}
-      <li><a href="{{ page.url }}" target="_self">{{ page.title }}</a></li>
+      <li><a href="{{ page.url }}" target="_self">{{ page.title }}</a>
+      </li>
       {% endfor %}
       </ul>
     {% else %}

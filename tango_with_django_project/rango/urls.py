@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^search/$', views.search, name='search'),
     url(r'^add_profile/$', views.register_profile, name='register_profile'),
+    url(r'^like_category/$', views.like_category, name='like_category'),
     url(r'^goto//?page_id=(?P<page_id>[\d+])/$', views.track_url, name='track_url'),
     # url(r'^login/$', views.user_login, name='login'),
     # url(r'^logout/$', views.user_logout, name='logout'),

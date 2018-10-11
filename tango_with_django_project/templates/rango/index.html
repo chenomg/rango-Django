@@ -16,7 +16,7 @@
             <ul class="list-group">
                 {% for category in categories %}
                 <li class="list-group-item">
-                    <a href="{% url 'rango:show_category' category.slug %}" target="_self">{{ category.name }}</a>
+                    <a href="{% url 'rango:show_category' category.slug %}" target="_self">{{ category.name }}</a>@{{ category.likes }}likes
                 </li>
                 {% endfor %}
             </ul>
@@ -30,7 +30,7 @@
             <ul class="list-group">
                 {% for page in pages %}
                 <li class="list-group-item">
-                    <a href="{% url 'rango:track_url' page.id %}" target="_blank">{{ page.title }}@{{ page.views }}</a>
+                    <a href="{% url 'rango:track_url' page.id %}" target="_blank">{{ page.title }}</a>@{{ page.views }}views
                 </li>
                 {% endfor %}
             </ul>
