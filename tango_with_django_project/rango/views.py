@@ -219,3 +219,10 @@ def like_category(request):
             cat.likes = likes
             cat.save()
     return HttpResponse(likes)
+
+
+def get_category_list(request, max_results=0, starts_with=''):
+    cats = None
+    if starts_with:
+        if request.method == 'GET':
+            cats = Category.objects.get()
