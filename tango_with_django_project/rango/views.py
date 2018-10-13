@@ -244,6 +244,7 @@ def suggest_category(request):
     return render(request, 'rango/category_list.html', {'cat_list': cat_list})
 
 
+@login_required
 def add_page_from_search(request):
     print('start to add page')
     if request.method == 'GET':
