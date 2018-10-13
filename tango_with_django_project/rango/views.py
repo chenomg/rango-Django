@@ -221,8 +221,40 @@ def like_category(request):
     return HttpResponse(likes)
 
 
-def get_category_list(request, max_results=0, starts_with=''):
-    cats = None
+def get_category_list(max_results=0, starts_with=''):
+    cat_list = []
     if starts_with:
-        if request.method == 'GET':
-            cats = Category.objects.get()
+        cat_list = Category.objects.filter(slug__startswith=starts_with)
+        print('get_category list:', cat_list)
+    if max_results > 0:
+        if len(cat_list) > max_results:
+            cat_list = cat_list[:max_results]
+    return cat_list
+
+
+def suggest_category(request):
+    print('Start to Search...'.center(50, '-'))
+    cat_list = []
+    starts_with = ''
+    if request.method == "GET":
+        starts_with = request.GET['suggestion'].lower()
+        print('starts_with: {}'.format(starts_with))
+    cat_list = get_category_list(max_results=8, starts_with=starts_with)
+    print('query_category list:', cat_list)
+    return render(request, 'rango/category_list.html', {'cat_list': cat_list})
+
+
+def add_page_from_search(request):
+    print('start to add page')
+    if request.method == 'GET':
+        title = request.GET['title']
+        url = request.GET['link']
+        category_id = request.GET['category_id']
+        page = Page()
+        page.title = title
+        page.url = url
+        page.category_id = category_id
+        page.views = 0
+        page.save()
+    page_list = Page.objects.filter(category_id=category_id)
+    return render(request, 'rango/page_list.html', {'page_list': page_list})

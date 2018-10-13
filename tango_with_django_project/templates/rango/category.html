@@ -16,12 +16,14 @@
         {% endif %}
     </p>
     {% if pages %}
-      <ul>
-      {% for page in pages %}
-      <li><a href="{{ page.url }}" target="_self">{{ page.title }}</a>
-      </li>
-      {% endfor %}
-      </ul>
+      <div id="refresh_pages">
+        <ul>
+        {% for page in pages %}
+        <li><a href="{{ page.url }}" target="_self">{{ page.title }}</a>
+        </li>
+        {% endfor %}
+        </ul>
+      </div>
     {% else %}
       <strong>There's no pages here!</strong>
     {% endif %}
@@ -52,11 +54,14 @@
         </form>
         {% if results %}
         {% for result in results %}
-        <h3><a href="{{ result.link }}">{{ result.title }}</a></h3>
-        <p>{{ result.summary }}</p>
-        <p><a href="{% url 'rango:show_category' category.slug %}">Add to this Category(待完善)</a></p>
-        <hr />
-        <br />
+        <div id="div_{{ result.link }}">
+          <h3><a href="{{ result.link }}">{{ result.title }}</a></h3>
+          <p>{{ result.summary }}</p>
+          <!--<p><a href="{% url 'rango:show_category' category.slug %}">Add to this Category(待完善)</a></p>-->
+          <p><button class="add_button" link="{{ result.link }}" title="{{ result.title }}" category_id="{{ category.id }}">Add to this Category</button></p>
+          <hr />
+          <br />
+        </div>
         {% endfor %}
         {% endif %}
     </div>

@@ -1,0 +1,12 @@
+<ul>
+  {% if page_list %}
+    {% for page in page_list %}
+        <li>
+          <a href="{{ page.url }}" target="_blank">
+            {{ page.title }}</a>
+        </li>
+    {% endfor %}
+  {% else %}
+    <li><strong>There are no Pages present.</strong></li>
+  {% endif %}
+</ul>
