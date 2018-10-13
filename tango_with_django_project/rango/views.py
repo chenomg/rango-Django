@@ -78,7 +78,7 @@ def show_category(request, category_name_slug):
     context_dict = {}
     try:
         category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
         context_dict['category'] = category
         context_dict['pages'] = pages
         if request.method == "POST":
@@ -251,11 +251,7 @@ def add_page_from_search(request):
         title = request.GET['title']
         url = request.GET['link']
         category_id = request.GET['category_id']
-        page = Page()
-        page.title = title
-        page.url = url
-        page.category_id = category_id
-        page.views = 0
-        page.save()
-    page_list = Page.objects.filter(category_id=category_id)
+        category = Category.objects.get(id=category_id)
+        page = Page.objects.get_or_create(category=category, title=title, url=url)
+    page_list = Page.objects.filter(category=category).order_by('-views')
     return render(request, 'rango/page_list.html', {'page_list': page_list})
